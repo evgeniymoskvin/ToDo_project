@@ -1,0 +1,13 @@
+{% extends "todo_manager/base.html" %}
+
+{% block title %}
+Подробности
+{% endblock %}
+{% block content %}
+
+    <h3>Детали</h3>
+    {% for key, value in api_detail.items%}
+        <p>{{ key }}: {{ value }}</p>
+    {% endfor %}
+
+{% endblock %}

@@ -1,0 +1,19 @@
+{% extends "todo_manager/base.html" %}
+
+{% block title %}
+Главная страница
+{% endblock %}
+{% block content %}
+    <h1>Главная</h1>
+    {% if api_data %}
+        {% for obj in api_data %}
+            <div class = "alert alert-success mt-2" >
+                <h3><a href="{% url 'details' pk=obj.id %}" class="link-dark">{{ obj.title }}</a></h3>
+                 <p>{{ obj.message }}</p>
+                 <p>{{ obj.time_field }}</p>
+            </div>
+        {% endfor %}
+    {% else %}
+        <p>Нет записей</p>
+    {% endif %}
+{% endblock %}
