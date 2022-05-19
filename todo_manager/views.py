@@ -35,9 +35,16 @@ class AddNoteView(View):
             return redirect('index')
 
 
+# class DetailViews(View):
+#     def get(self, request, pk):
+#         api_detail = api_v.ToDoView().get(request, pk=pk)
+#         content = {'api_detail': api_detail,
+#                    'user': request.user}
+#         return render(request, 'todo_manager/details.html', content)
+
 class DetailViews(View):
     def get(self, request, pk):
-        api_detail = api_v.ToDoDetailView().get(request, pk=pk)
+        api_detail = api_v.ToDoDetailView().get_data(request, pk=pk)
         content = {'api_detail': api_detail,
                    'user': request.user}
         return render(request, 'todo_manager/details.html', content)

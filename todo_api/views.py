@@ -1,8 +1,7 @@
 from rest_framework.generics import ListAPIView, GenericAPIView
+from todo_manager.models import ToDoModel, Comments
 from rest_framework.views import APIView
 from rest_framework.response import Response
-from django.shortcuts import get_object_or_404
-from todo_manager.models import ToDoModel, Comments
 from . import serializers
 
 
@@ -15,8 +14,19 @@ class ToDOapiView(ListAPIView):
         return queryset.filter(public=True)
 
 
-class ToDoDetailView(APIView):
-    def get(self, request, pk):
-        note = get_object_or_404(ToDoModel, pk=pk)
+class ToDoDetailView(ListAPIView):
+    serializer_class = serializers.TaskSerializer
+    queryset = ToDoModel.objects.all()
+
+    def get_queryset(self):
+        pk = self.kwargs['pk']
+        queryset = super().get_queryset()
+        return queryset.filter(id=pk)
+
+    def get_data(self, request, pk):
+        note = ToDoModel.objects.get(pk=pk)
         serializer = serializers.TaskSerializer(instance=note, )
         return serializer.data
+
+
+

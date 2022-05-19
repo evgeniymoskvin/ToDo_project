@@ -6,8 +6,22 @@
 {% block content %}
 
     <h3>Детали</h3>
-    {% for key, value in api_detail.items%}
+{#    {% if api_detail %}#}
+{#        {% for obj in api_detail %}#}
+{#            <div class = "alert alert-success mt-2" >#}
+{#                <h3>{{ obj.title }}</h3>#}
+{#                <p>{{ obj.message }}</p>#}
+{#                <p>Дата: {{ obj.time_field }}</p>#}
+{#                <p>Публично: {{ obj.public }}</p>#}
+{#                <p>id: {{ obj.id }}</p>#}
+{#                <p>Автор: {{ obj.author }}</p>#}
+{#            </div>#}
+{#        {% endfor %}#}
+{#    {% else %}#}
+{#        <p>Нет записей</p>#}
+{#    {% endif %}#}
+
+        {% for key, value in api_detail.items%}
         <p>{{ key }}: {{ value }}</p>
     {% endfor %}
-
 {% endblock %}
