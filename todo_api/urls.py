@@ -19,5 +19,6 @@ from . import views
 
 urlpatterns = [
     path('api/v1/', views.ToDOapiView.as_view(), name='api'),
+    path('api/v1/public/', views.ToDOPublicapiView.as_view(), name='public'),
     path('api/v1/<int:pk>', views.ToDoDetailView.as_view(), name="detail"),
     ]

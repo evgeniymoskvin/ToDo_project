@@ -1,27 +1,38 @@
 {% extends "todo_manager/base.html" %}
 
 {% block title %}
-Подробности
+    Подробности
 {% endblock %}
 {% block content %}
 
-    <h3>Детали</h3>
-{#    {% if api_detail %}#}
-{#        {% for obj in api_detail %}#}
-{#            <div class = "alert alert-success mt-2" >#}
-{#                <h3>{{ obj.title }}</h3>#}
-{#                <p>{{ obj.message }}</p>#}
-{#                <p>Дата: {{ obj.time_field }}</p>#}
-{#                <p>Публично: {{ obj.public }}</p>#}
-{#                <p>id: {{ obj.id }}</p>#}
-{#                <p>Автор: {{ obj.author }}</p>#}
-{#            </div>#}
-{#        {% endfor %}#}
-{#    {% else %}#}
-{#        <p>Нет записей</p>#}
-{#    {% endif %}#}
-
-        {% for key, value in api_detail.items%}
-        <p>{{ key }}: {{ value }}</p>
-    {% endfor %}
+    <h3>Детали к записи №{{ obj.id }}</h3>
+    {#    {{ api_detail }}#}
+    <div class="alert alert-success mt-2">
+        <h4>{{ obj.title }}</h4>
+        <p class="h6">{{ obj.message }}</p>
+        <p class="h6">Дата: {{ obj.time_field }}<br>
+            Публично: {{ obj.public }}<br>
+            Автор: {{ obj.author }}
+        </p>
+    </div>
+    <h3>Комментарии</h3>
+    {% if comments %}
+        <div class="alert alert-success mt-2">
+            <figure>
+                {% for comment in comments %}
+                    <blockquote class="blockquote">
+                        <p>{{ comment.comment }}</p>
+                    </blockquote>
+                    <figcaption class="blockquote-footer"> Автор: {{ comment.author }} </figcaption>
+                {% endfor %}
+            </figure>
+        </div>
+    {% else %}
+        <p>Комментариев пока что нет...</p>
+    {% endif %}
+    <form method="post">
+        {% csrf_token %}
+        <p>Добавить комментарий: {{ form.comment }}</p>
+        <button type="submit" class="btn btn-success">Добавить</button>
+    </form>
 {% endblock %}

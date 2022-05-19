@@ -1,5 +1,5 @@
-from .models import ToDoModel
-from django.forms import ModelForm, TextInput, Textarea, CheckboxInput, Select, SelectDateWidget, SplitDateTimeWidget
+from .models import ToDoModel, Comments
+from django.forms import ModelForm, TextInput, Textarea, CheckboxInput, Select
 from django.contrib.admin.widgets import AdminDateWidget, AdminSplitDateTime
 
 class TodoForm(ModelForm):
@@ -14,5 +14,12 @@ class TodoForm(ModelForm):
                    "important": CheckboxInput(),
                    "public": CheckboxInput(),
                    "status": Select(attrs={'class': "btn btn-first dropdown-toggle"}),
-                   "time_field": SplitDateTimeWidget()
                    }
+
+
+class CommentForm(ModelForm):
+    class Meta:
+        model = Comments
+        fields = {"comment"}
+        widgets = {"comment": Textarea(attrs={"placeholder": "Введите комментарий",
+                                              "class": "form-control"})}
