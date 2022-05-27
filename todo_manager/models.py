@@ -6,7 +6,6 @@ from django.contrib.auth.models import User
 from django.utils.translation import gettext_lazy as _
 
 
-
 def get_date():
     return datetime.now() + timedelta(days=1)
 
@@ -38,7 +37,8 @@ class ToDoModel(models.Model):
 class Comments(models.Model):
     comment = models.TextField("Текст комментария", max_length=5000)
     author = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name="Автор")
-    todo_post = models.ForeignKey(ToDoModel, on_delete=models.CASCADE, verbose_name="Пост", default=None)
+    todo_post = models.ForeignKey(ToDoModel, on_delete=models.CASCADE, verbose_name="Пост", related_name="comments",
+                                  default=None)
 
     def __str__(self):
         return f'{self.author.username}: {self.comment[:25]}'
