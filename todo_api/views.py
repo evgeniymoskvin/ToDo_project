@@ -14,6 +14,8 @@ class ToDOapiView(ListAPIView):
 
     def filter_queryset(self, queryset):
         queryset = filters.author_id_filter(queryset, author_id=self.request.query_params.get("author_id"))
+        queryset = filters.important_filter(queryset, important=self.request.query_params.get("important"))
+        queryset = filters.public_filter(queryset, public=self.request.query_params.get("public"))
         return queryset.order_by("important").order_by("status")
 
 
@@ -44,7 +46,7 @@ class ToDoDetailView(APIView):
             ser.save(author=request.user)
             return Response(ser.data)
         else:
-            return Response(status=status.HTTP_400_BAD_REQUEST)
+            return Response(data="Вы не можете изменять заметку", status=status.HTTP_400_BAD_REQUEST)
 
 
 class CommentsView(ListAPIView):
