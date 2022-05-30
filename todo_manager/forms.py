@@ -23,3 +23,4 @@ class CommentForm(ModelForm):
         fields = {"comment"}
         widgets = {"comment": Textarea(attrs={"placeholder": "Введите комментарий",
                                               "class": "form-control"})}
+

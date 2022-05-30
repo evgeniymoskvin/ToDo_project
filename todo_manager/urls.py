@@ -21,6 +21,7 @@ urlpatterns = [
     path('', views.IndexView.as_view(), name='index'),
     path('about/', views.AboutView.as_view(), name='about'),
     path('add_note/', views.AddNoteView.as_view(), name='add_note'),
-    path('details/<int:pk>', views.DetailViews.as_view(), name='details')
-
+    path('details/<int:pk>', views.DetailViews.as_view(), name='details'),
+    path('details/<int:pk>/delete', views.DetailViewsDelete.as_view(), name='delete_object'),
+    path('details/<int:pk>/update', views.UpdateViewDetail.as_view(), name='update_object')
 ]

@@ -5,7 +5,7 @@
 {% endblock %}
 {% block content %}
 
-    <h3>Детали к записи №{{ obj.id }}</h3>
+    <h3 class="m-3">Детали к записи №{{ obj.id }}</h3>
     {#    {{ api_detail }}#}
     <div class="{% if obj.public %} alert alert-success mt-2 {% else %} alert alert-warning mt-2 {% endif %}">
         <h4>{{ obj.title }}</h4>
@@ -15,7 +15,34 @@
             Автор: {{ obj.author }}<br>
             Статус: {{ obj.get_status_display }}
         </p>
-    <button type="submit" class="btn btn-success" href="/">Редактировать</button>
+        {% if obj.author == request.user %}
+            <!-- Button trigger modal -->
+            <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#DeleteModal">
+                Удалить
+            </button>
+
+            <!-- Modal -->
+            <div class="modal fade" id="DeleteModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+                 aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Удалить запись</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <p class="h6">Удалить запись?</p>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Отмена</button>
+                            <a href="{% url "delete_object" pk=obj.id %}" class="btn btn-danger">Удалить</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% endif %}
+
+
     </div>
     <h3>Комментарии</h3>
     {% if obj.public %}

@@ -3,6 +3,7 @@ from django.views import View
 from .forms import TodoForm, CommentForm
 from todo_api import views as api_v
 from .models import ToDoModel, Comments
+from django.views.generic import UpdateView
 from django.http.response import HttpResponseRedirect
 
 
@@ -59,3 +60,16 @@ class DetailViews(View):
             new_post.todo_post_id = pk
             form.save()
             return redirect(request.META['HTTP_REFERER'])
+
+
+class DetailViewsDelete(View):
+
+    def get(self, request, pk):
+        post_del = ToDoModel.objects.get(pk=pk)
+        if post_del.author == request.user:
+            post_del.delete()
+        return redirect('index')
+
+
+class UpdateViewDetail(View):
+    ...
