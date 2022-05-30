@@ -23,5 +23,6 @@ urlpatterns = [
     path('add_note/', views.AddNoteView.as_view(), name='add_note'),
     path('details/<int:pk>', views.DetailViews.as_view(), name='details'),
     path('details/<int:pk>/delete', views.DetailViewsDelete.as_view(), name='delete_object'),
-    path('details/<int:pk>/update', views.UpdateViewDetail.as_view(), name='update_object')
+    path('details/<int:pk>/update', views.UpdateViewDetail.as_view(), name='update_object'),
+    path('my_notes/', views.NoteMyView.as_view(), name='my_notes')
 ]

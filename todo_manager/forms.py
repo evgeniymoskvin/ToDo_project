@@ -2,6 +2,7 @@ from .models import ToDoModel, Comments
 from django.forms import ModelForm, TextInput, Textarea, CheckboxInput, Select
 from django.contrib.admin.widgets import AdminDateWidget, AdminSplitDateTime
 
+
 class TodoForm(ModelForm):
     class Meta:
         model = ToDoModel
@@ -24,3 +25,17 @@ class CommentForm(ModelForm):
         widgets = {"comment": Textarea(attrs={"placeholder": "Введите комментарий",
                                               "class": "form-control"})}
 
+
+class UpdateForm(ModelForm):
+    class Meta:
+        model = ToDoModel
+        exclude = ['author']
+        # fields = ["author", "title", 'message', 'important', 'public', 'status']
+        widgets = {"title": TextInput(attrs={"placeholder": ToDoModel.title,
+                                             "class": "form-control"}),
+                   "message": Textarea(attrs={"placeholder": ToDoModel.message,
+                                              "class": "form-control"}),
+                   "important": CheckboxInput(),
+                   "public": CheckboxInput(),
+                   "status": Select(attrs={'class': "btn btn-first dropdown-toggle"}),
+                   }

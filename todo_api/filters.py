@@ -15,6 +15,7 @@ def important_filter(queryset: QuerySet, important: Optional[int]):
     else:
         return queryset
 
+
 def public_filter(queryset: QuerySet, public: Optional[int]):
     if public is not None:
         return queryset.filter(public=public)

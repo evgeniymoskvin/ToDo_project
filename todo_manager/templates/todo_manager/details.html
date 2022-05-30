@@ -16,6 +16,7 @@
             Статус: {{ obj.get_status_display }}
         </p>
         {% if obj.author == request.user %}
+            <a href="{% url "update_object" pk=obj.id %}" class="btn btn-primary">Редактировать</a>
             <!-- Button trigger modal -->
             <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#DeleteModal">
                 Удалить

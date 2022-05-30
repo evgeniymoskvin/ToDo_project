@@ -3,6 +3,7 @@ from django.views import View
 from .forms import TodoForm, CommentForm
 from todo_api import views as api_v
 from .models import ToDoModel, Comments
+from django.http import HttpRequest
 from django.views.generic import UpdateView
 from django.http.response import HttpResponseRedirect
 
@@ -18,9 +19,10 @@ class IndexView(View):
 
 
 class AboutView(View):
-    def get(self, request):
+    def get(self, request: HttpRequest):
         content = {'user': request.user,
-                   'server': request.get_host()}
+                   'server': request.get_host(),
+                   'request': request}
         return render(request, 'todo_manager/about.html', content)
 
 
@@ -71,5 +73,17 @@ class DetailViewsDelete(View):
         return redirect('index')
 
 
-class UpdateViewDetail(View):
-    ...
+class NoteMyView(View):
+    def get(self, request):
+        obj = ToDoModel.objects.all()
+        content = {'obj': obj.filter(author=request.user),
+                   'user': request.user
+                   }
+        return render(request, 'todo_manager/user_notes.html', content)
+
+
+class UpdateViewDetail(UpdateView):
+    model = ToDoModel
+    template_name = 'todo_manager/add_note.html'
+    form_class = TodoForm
+

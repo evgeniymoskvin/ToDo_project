@@ -35,7 +35,7 @@ class ToDOPublicapiView(ListAPIView):
 class ToDoDetailView(APIView):
     def get(self, request, pk):
         todo = get_object_or_404(ToDoModel, pk=pk)
-        return Response(serializers.TaskSerializer(instance=todo).data)
+        return Response(serializers.DetailTaskSerializer(instance=todo).data)
 
     def patch(self, request, pk):
         todo = get_object_or_404(ToDoModel, pk=pk)

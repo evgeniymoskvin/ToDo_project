@@ -1,0 +1,20 @@
+{% extends "todo_manager/base.html" %}
+
+{% block title %}
+    Главная страница
+{% endblock %}
+{% block content %}
+    <h2 class="m-3">Задачи </h2>
+    {% if obj %}
+        {% for ob in obj %}
+            <div class="{% if ob.public %} alert alert-success mt-2 {% else %} alert alert-warning mt-2 {% endif %}">
+                <h4><a href="{% url 'details' pk=ob.id %}" class="link-dark">{{ ob.title }}</a></h4>
+                <p class="h6">{{ ob.message }}<br>
+                    {{ ob.time_field }}</p>
+            </div>
+        {% endfor %}
+
+    {% else %}
+        <p>Нет записей</p>
+    {% endif %}
+{% endblock %}

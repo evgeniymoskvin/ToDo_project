@@ -29,6 +29,9 @@ class ToDoModel(models.Model):
     def __str__(self):
         return f'{self.title}'
 
+    def get_absolute_url(self):
+        return f'/details/{self.id}'
+
     class Meta:
         verbose_name = _("Задача")
         verbose_name_plural = _("Задачи")
