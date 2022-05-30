@@ -16,7 +16,7 @@
         <p class="h6">Важно: {{ form.important }}</p>
         <p class="h6">Дата исполнения: {{ form.time_field }}</p>
         <p class="h6">Публично: {{ form.public }}  </p>
-        <button type="submit" class="btn btn-success">Добавить</button>
+        <button type="submit" class="btn btn-success" href="{% url 'add_note' %}">Добавить</button>
     {% else %}
         <p class="h6">Необходимо выполнить вход</p>
     {% endif %}

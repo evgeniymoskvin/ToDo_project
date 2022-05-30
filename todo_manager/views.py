@@ -3,6 +3,7 @@ from django.views import View
 from .forms import TodoForm, CommentForm
 from todo_api import views as api_v
 from .models import ToDoModel, Comments
+from django.http.response import HttpResponseRedirect
 
 
 class IndexView(View):
@@ -57,8 +58,4 @@ class DetailViews(View):
             new_post.author = request.user
             new_post.todo_post_id = pk
             form.save()
-            obj = ToDoModel.objects.get(pk=pk)
-            content = {'obj': obj,
-                       'user': request.user,
-                       'form': form}
-            return render(request, 'todo_manager/details.html', content)
+            return redirect(request.META['HTTP_REFERER'])

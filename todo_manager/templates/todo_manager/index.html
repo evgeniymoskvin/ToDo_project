@@ -24,26 +24,18 @@
                     <div class="alert alert-success mt-2">
                         <h4><a href="{% url 'details' pk=obj.id %}" class="link-dark">{{ obj.title }}</a></h4>
                         <p class="h6">{{ obj.message }}<br>
-                        {{ obj.time_field }}</p>
+                            {{ obj.time_field }}</p>
                     </div>
                 {% endfor %}
             </div>
             <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
                 {% for obj in api_data_all %}
-                    {% if obj.important %}
-                        <div class="alert alert-warning mt-2">
-                            <h4><a href="{% url 'details' pk=obj.id %}" class="link-dark">{{ obj.title }}</a></h4>
-                            <p class="h6">{{ obj.message }}<br>
-                                {{ obj.time_field }}
-                            </p>
-                        </div>
-                    {% else %}
-                        <div class="alert alert-success mt-2">
-                            <h4><a href="{% url 'details' pk=obj.id %}" class="link-dark">{{ obj.title }}</a></h4>
-                            <p class="h6">{{ obj.message }}<br>
-                                {{ obj.time_field }}</p>
-                        </div>
-                    {% endif %}
+                    <div class="{% if obj.public %} alert alert-success mt-2 {% else %} alert alert-warning mt-2 {% endif %}">
+                        <h4><a href="{% url 'details' pk=obj.id %}" class="link-dark">{{ obj.title }}</a></h4>
+                        <p class="h6">{{ obj.message }}<br>
+                            {{ obj.time_field }}
+                        </p>
+                    </div>
                 {% endfor %}
             </div>
             <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">...</div>
