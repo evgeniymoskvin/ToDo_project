@@ -1,5 +1,6 @@
 from typing import Optional
 from django.db.models.query import QuerySet
+from . import serializers
 
 
 def author_id_filter(queryset: QuerySet, author_id: Optional[int]):
@@ -21,3 +22,4 @@ def public_filter(queryset: QuerySet, public: Optional[int]):
         return queryset.filter(public=public)
     else:
         return queryset
+

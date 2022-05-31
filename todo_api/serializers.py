@@ -25,5 +25,8 @@ class DetailTaskSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = ToDoModel
-        fields = ("title", "message", "status", "author", "comments", )
+        fields = ("title", "message", "status", "author", "comments",)
 
+
+class QueryParamsTaskFilterSerializer(serializers.Serializer):
+    status = serializers.ListField(child=serializers.ChoiceField(choices=ToDoModel.StatusNote.choices), required=False)

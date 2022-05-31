@@ -11,8 +11,13 @@ class ToDOapiView(ListAPIView):
     queryset = ToDoModel.objects.all()
     serializer_class = serializers.TaskSerializer
 
-
     def filter_queryset(self, queryset):
+        query_params = serializers.QueryParamsTaskFilterSerializer(data=self.request.query_params)
+        query_params.is_valid(raise_exception=True)
+        list_status = query_params.data.get("status")
+        if list_status:
+            queryset = queryset.filter(status__in=query_params.data["status"])
+
         queryset = filters.author_id_filter(queryset, author_id=self.request.query_params.get("author_id"))
         queryset = filters.important_filter(queryset, important=self.request.query_params.get("important"))
         queryset = filters.public_filter(queryset, public=self.request.query_params.get("public"))
@@ -28,10 +33,6 @@ class ToDOPublicapiView(ListAPIView):
         return queryset.filter(public=True)
 
 
-# class ToDoDetailView(RetrieveAPIView, UpdateAPIView):
-#     queryset = ToDoModel.objects.all()
-#     serializer_class = serializers.DetailTaskSerializer
-
 class ToDoDetailView(APIView):
     def get(self, request, pk):
         todo = get_object_or_404(ToDoModel, pk=pk)
@@ -46,16 +47,10 @@ class ToDoDetailView(APIView):
             ser.save(author=request.user)
             return Response(ser.data)
         else:
-            return Response(data="Вы не можете изменять заметку", status=status.HTTP_400_BAD_REQUEST)
+            return Response(data="Вы не можете изменять заметку", status=status.HTTP_403_FORBIDDEN)
 
 
 class CommentsView(ListAPIView):
     queryset = Comments.objects.all()
     serializer_class = serializers.CommentSerializer
-
-#
-# class ToDoAuthorAPIView(ListAPIView):
-#     queryset = ToDoModel.objects.all()
-#     serializer_class = serializers.TaskSerializer
-
 

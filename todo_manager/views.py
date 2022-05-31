@@ -10,10 +10,10 @@ from django.http.response import HttpResponseRedirect
 
 class IndexView(View):
     def get(self, request):
-        api_data_public = api_v.ToDOPublicapiView().get_queryset()
-        api_data_all = api_v.ToDOapiView().get_queryset()
-        content = {'api_data_public': api_data_public,
-                   'api_data_all': api_data_all,
+        data_public = ToDoModel.objects.get_queryset().filter(public=True)
+        data_all = ToDoModel.objects.get_queryset()
+        content = {'data_public': data_public,
+                   'data_all': data_all,
                    'user': request.user}
         return render(request, 'todo_manager/index.html', content)
 
