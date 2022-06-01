@@ -5,6 +5,7 @@ from todo_api import views as api_v
 from .models import ToDoModel, Comments
 from django.http import HttpRequest
 from django.views.generic import UpdateView
+
 from django.http.response import HttpResponseRedirect
 
 

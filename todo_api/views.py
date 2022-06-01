@@ -5,11 +5,13 @@ from rest_framework.response import Response
 from . import serializers, filters
 from django.shortcuts import get_object_or_404
 from rest_framework import status
+from django_filters.rest_framework import DjangoFilterBackend
 
 
 class ToDOapiView(ListAPIView):
     queryset = ToDoModel.objects.all()
     serializer_class = serializers.TaskSerializer
+    filter_backends = [DjangoFilterBackend]
 
     def filter_queryset(self, queryset):
         query_params = serializers.QueryParamsTaskFilterSerializer(data=self.request.query_params)

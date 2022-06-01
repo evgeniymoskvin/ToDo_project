@@ -44,7 +44,8 @@
 
 {#                <li class="nav-item"><a href="{% url 'logout' %}" class="btn btn-primary" role="button">Logout</a></li>#}
             {% else %}
-                <li class="nav-item"><a href="{% url 'login' %}" class="btn btn-primary" role="button">Login</a></li>
+                <li class="nav-item"><a href="{% url 'login' %}" class="btn btn-outline-primary me-2" role="button">Login</a></li>
+                <li class="nav-item"><a href="{% url 'signup' %}" class="btn btn-primary" role="button">Sign up</a></li>
             {% endif %}
         </ul>
     </div>
@@ -55,5 +56,4 @@
 </div>
 </body>
 </html>
-
 
