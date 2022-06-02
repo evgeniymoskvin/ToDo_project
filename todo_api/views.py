@@ -9,8 +9,7 @@ from rest_framework.permissions import IsAuthenticated
 from django_filters.rest_framework import DjangoFilterBackend
 
 
-class ToDOapiView(ListCreateAPIView):
-    # fixme add permission
+class ToDOApiView(ListCreateAPIView):
     permission_classes = (IsAuthenticated,)
     queryset = ToDoModel.objects.all()
     serializer = serializers.TaskSerializer
@@ -40,7 +39,7 @@ class ToDOapiView(ListCreateAPIView):
         return queryset.order_by("important", "status")
 
 
-class ToDOPublicapiView(ListAPIView):
+class ToDOPublicApiView(ListAPIView):
     permission_classes = (IsAuthenticated,)
     queryset = ToDoModel.objects.all()
     serializer_class = serializers.TaskSerializer
