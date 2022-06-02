@@ -1,17 +1,25 @@
-from rest_framework.generics import ListAPIView, GenericAPIView, RetrieveAPIView, UpdateAPIView
+from rest_framework.generics import ListAPIView, ListCreateAPIView, GenericAPIView, RetrieveAPIView, UpdateAPIView
 from todo_manager.models import ToDoModel, Comments
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from . import serializers, filters
 from django.shortcuts import get_object_or_404
 from rest_framework import status
+from rest_framework.request import Request
 from django_filters.rest_framework import DjangoFilterBackend
 
 
-class ToDOapiView(ListAPIView):
+class ToDOapiView(ListCreateAPIView):
     queryset = ToDoModel.objects.all()
+    serializer = serializers.TaskSerializer
     serializer_class = serializers.TaskSerializer
-    filter_backends = [DjangoFilterBackend]
+    # filter_backends = [DjangoFilterBackend]
+
+    def post(self, request, *args, **kwargs):
+        serializer = serializers.TaskSerializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        serializer.save(author=request.user)
+        return Response(serializer.data, status=status.HTTP_201_CREATED)
 
     def filter_queryset(self, queryset):
         query_params = serializers.QueryParamsTaskFilterSerializer(data=self.request.query_params)
