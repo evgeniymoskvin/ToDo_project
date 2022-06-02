@@ -10,7 +10,7 @@ from django_filters.rest_framework import DjangoFilterBackend
 
 
 class ToDOApiView(ListCreateAPIView):
-    permission_classes = (IsAuthenticated,)
+    # permission_classes = (IsAuthenticated,)
     queryset = ToDoModel.objects.all()
     serializer_class = serializers.TaskSerializer
 
