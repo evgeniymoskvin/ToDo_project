@@ -12,7 +12,6 @@ from django_filters.rest_framework import DjangoFilterBackend
 class ToDOApiView(ListCreateAPIView):
     permission_classes = (IsAuthenticated,)
     queryset = ToDoModel.objects.all()
-    serializer = serializers.TaskSerializer
     serializer_class = serializers.TaskSerializer
 
     # filter_backends = [DjangoFilterBackend]

@@ -46,6 +46,7 @@
 
     </div>
     <h3>Комментарии</h3>
+
     {% if obj.public %}
         {% if comments %}
             {% for comment in comments %}
@@ -61,11 +62,13 @@
         {% else %}
             <p>Комментариев пока что нет...</p>
         {% endif %}
-        <form method="post">
-            {% csrf_token %}
-            <p>Добавить комментарий: {{ form.comment }}</p>
-            <button type="submit" class="btn btn-success">Добавить</button>
-        </form>
+          {% if user.is_active %}
+              <form method="post">
+                  {% csrf_token %}
+                  <p>Добавить комментарий: {{ form.comment }}</p>
+                  <button type="submit" class="btn btn-success">Добавить</button>
+              </form>
+              {% endif %}
     {% else %}
         <p>Комментировать можно только публичную запись</p>
     {% endif %}
