@@ -5,7 +5,6 @@ from rest_framework.response import Response
 from . import serializers, filters
 from django.shortcuts import get_object_or_404
 from rest_framework import status
-from rest_framework.request import Request
 from django_filters.rest_framework import DjangoFilterBackend
 
 
