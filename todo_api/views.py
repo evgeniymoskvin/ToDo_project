@@ -1,4 +1,4 @@
-from rest_framework.generics import ListAPIView, ListCreateAPIView, GenericAPIView, RetrieveAPIView, UpdateAPIView
+from rest_framework.generics import ListAPIView, ListCreateAPIView
 from todo_manager.models import ToDoModel, Comments
 from rest_framework.views import APIView
 from rest_framework.response import Response
@@ -58,6 +58,8 @@ class ToDoDetailView(APIView):
             return Response(ser.data)
         else:
             return Response(data="Вы не можете изменять заметку", status=status.HTTP_403_FORBIDDEN)
+
+
 
 
 class CommentsView(ListAPIView):
