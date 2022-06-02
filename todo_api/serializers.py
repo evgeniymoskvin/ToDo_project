@@ -1,4 +1,5 @@
 from rest_framework import serializers
+
 from todo_manager.models import ToDoModel, Comments
 from datetime import datetime
 
@@ -15,6 +16,11 @@ class CommentSerializer(serializers.ModelSerializer):
         model = Comments
         fields = "__all__"
 
+class CommentSerializerCreate(serializers.ModelSerializer):
+    class Meta:
+        model = Comments
+        fields = "__all__"
+        read_only_fields = ('author',)
 
 class DetailTaskSerializer(serializers.ModelSerializer):
     author = serializers.SlugRelatedField(

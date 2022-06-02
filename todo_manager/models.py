@@ -19,7 +19,7 @@ class ToDoModel(models.Model):
         DONE = 3, _('Выполнено')
 
     author = models.ForeignKey(User, on_delete=models.CASCADE)
-    title = models.CharField("Заголовок", max_length=150)
+    title = models.CharField(_("Заголовок"), max_length=150)
     message = models.TextField("Текст заметки", max_length=5000)
     status = models.IntegerField(verbose_name="Статус", default=StatusNote.ACTIVE, choices=StatusNote.choices)
     important = models.BooleanField("Важно", default=False)
@@ -33,7 +33,7 @@ class ToDoModel(models.Model):
         return f'/details/{self.id}'
 
     class Meta:
-        verbose_name = _("Задача")
+        verbose_name = _("Задача")  # todo с маленькой буквы
         verbose_name_plural = _("Задачи")
 
 

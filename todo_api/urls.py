@@ -22,4 +22,5 @@ urlpatterns = [
     path('api/v1/public/', views.ToDOPublicapiView.as_view(), name='public'),
     path('api/v1/<int:pk>', views.ToDoDetailView.as_view(), name="detail"),
     path('api/v1/com/', views.CommentsView.as_view(), name="comments"),
+    path('api/v1/createcomment/', views.CreateComment.as_view(), name='createcomment')
     ]
